@@ -1,0 +1,39 @@
+﻿body {
+    background-color: #263238
+}
+/* Set padding to keep content from hitting the edges */
+
+
+.user-pp {
+    padding: 20px;
+    width: initial;
+    color: #37474ff;
+}
+
+.font-size-20 {
+    font-size: 20px
+}
+.font-size-100 {
+    font-size: 100px
+}
+
+
+/*
+    Form 
+*/
+
+.form-type-1{
+    background-color: #eceff1;
+    padding:10px;
+    border-radius:10px
+}
+
+
+
+/*
+    Footer
+*/
+
+footer{
+    color: #adadad;
+}
