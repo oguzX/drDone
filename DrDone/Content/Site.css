@@ -28,6 +28,23 @@
     border-radius:10px
 }
 
+.input-validation-error {
+    border: 1px solid red;
+    background-color: $ffeeee;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.validation-summary-errors {
+    color: red;
+    font-weight: bold;
+}
 
 
 /*

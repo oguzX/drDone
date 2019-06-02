@@ -13,7 +13,8 @@ namespace DrDone
                 .Include("~/Scripts/jquery.validate*")
                 .Include("~/Scripts/modernizr-*")
                 .Include("~/Scripts/bootstrap.js")
-                .Include("~/Scripts/all.min.js"));
+                .Include("~/Scripts/all.min.js")
+                .Include("~/areas/admin/Content/script.js"));
 
             bundles.Add(new StyleBundle("~/Content/css")
                 .Include("~/Content/bootstrap.min.css")
