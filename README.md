@@ -26,7 +26,7 @@ this is my Web development course work. Writing with Asp.Net MVC.
      - Always categories products!
 - User can Sign in and Sign up
 
-# Several images from DrDone
+# Several images from the DrDone
 ## Home Page
 [![ - ](https://i.ibb.co/K0wXxh1/genel.png " - ")](https://i.ibb.co/K0wXxh1/genel.png " - ")
 
