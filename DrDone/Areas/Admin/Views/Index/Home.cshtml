@@ -1,0 +1,12 @@
+﻿@model DrDone.Areas.Admin.ViewModels.IndexModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Admin Paneline hoş geldiniz</h2>
+
+<h4><i class="fas fa-users"></i> Toplam Kullanıcı Sayısı : <b class="text-info">@Model.UserCount</b></h4>
+<h4><i class="fas fa-box"></i> Toplam Ürün Sayısı : <b class="text-info">@Model.ProductCount</b></</h4>
+<h4><i class="fas fa-clipboard-list"></i> Toplam Kategori Sayısı : <b class="text-info">@Model.CategoryCount</b></h4>
+

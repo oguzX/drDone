@@ -1,0 +1,61 @@
+﻿@model DrDone.Areas.Admin.ViewModels.ProductForm
+
+@using (Html.BeginForm("Form", "Product",FormMethod.Post,new { enctype="multipart/form-data"}))
+{
+    if (!Model.IsNew)
+    {
+        @Html.HiddenFor(f=>f.PostId)
+    }
+    @Html.AntiForgeryToken();
+<div class="row">
+    <div class="col-8 mx-auto">
+        <div class="card">
+            <div class="card-header"><h4>@(Model.IsNew ? "Yeni Ürün" : "Ürünü Güncelle")</h4></div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-8">
+                        @Html.ValidationSummary()
+                        <div class="form-group">
+                            @Html.LabelFor(f => f.Title)
+                            @Html.TextBoxFor(f => f.Title, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(f => f.Content)
+                            @Html.TextAreaFor(f => f.Content, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(f => f.Price)
+                            @Html.TextBoxFor(f => f.Price, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Partial("_CategoryEditor", Model.Categories)
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">Ürün Görseli</div>
+                            <div class="card-body">
+                                @if (Model.IsNew)
+                                {
+                                    <input type="file" class="dropify" name="Image" data-allowed-file-extensions="jpg png" required />
+                                }
+                                else
+                                {
+                                    <input type="file" class="dropify" data-default-file="@Url.Content(Model.ImageUrl)" name="Image" data-allowed-file-extensions="jpg png" required />
+                                }
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">Ürün Ayarları</div>
+                            <div class="card-body">
+                                <input type="submit" value="@(Model.IsNew ? "Yayınla":"Güncelle")" class="btn btn-success btn-sm" />
+                                <a href="@Url.Action("index")">iptal et</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}

@@ -29,6 +29,9 @@ namespace DrDone
             //add mappings
             var mapper = new ModelMapper();
             mapper.AddMapping<UserMap>();
+            mapper.AddMapping<RoleMap>();
+            mapper.AddMapping<CategoryMap>();
+            mapper.AddMapping<ProductMap>(); 
 
             config.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
 

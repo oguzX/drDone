@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SBlogA.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -36,7 +37,7 @@ namespace DrDone.Infrastructure
 
         public override string[] GetRolesForUser(string username)
         {
-            return new string[] { "admin" };
+            return Auth.User.Roles.Select(role=> role.Name).ToArray();
         }
 
         public override string[] GetUsersInRole(string roleName)

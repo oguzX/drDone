@@ -19,17 +19,28 @@
         }
     }
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a href="@Url.Content("~/home")" class="navbar-brand">DrDone</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="nav navbar-nav">
-                <li class="nav-item @SelectedTabClass("Home")">
-                <a href="@Url.Action("Home","Index")" class="nav-link">Ana Sayfa</a>
-                </li>
-                <li class="nav-item @SelectedTabClass("Admin")">@Html.ActionLink("About", "About", "Home",new { @class="nav-link"})</li>
-                <li class="nav-item @SelectedTabClass("Contact")">@Html.ActionLink("Contact", "Contact", "Home",new { @class="nav-link"})</li>
+            <ul class="nav navbar-nav mr-auto>
+                <li class="nav-item @SelectedTabClass(" Home")">@Html.ActionLink("Kullancılar", "index", new { controller = "users", Area = "Admin" }, new { @class = "nav-link" })</li>
+                <li class="nav-item @SelectedTabClass("Product")">@Html.ActionLink("Ürünler", "index", new { controller = "product", Area = "Admin" }, new { @class = "nav-link" })</li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("admin"))
+                    {
+                        <li class="nav-item @SelectedTabClass("Admin")">@Html.ActionLink("Panel", "Home", new { controller = "Index", Area = "Admin" }, new { @class = "nav-link" })</li>
+                        <li class="nav-item @SelectedTabClass("Logout")">@Html.ActionLink("Çıkış", "logout", new { controller = "user", Area = AreaReference.UseRoot }, new { @class = "nav-link" })</li>
+                    }
+                }
+                else
+                {
+                    <li class="nav-item @SelectedTabClass("Login")">@Html.ActionLink("Giriş Yap", "login", new { controller = "user" }, new { @class = "nav-link" })</li>
+                }
             </ul>
         </div>
     </nav>

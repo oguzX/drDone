@@ -1,0 +1,50 @@
+﻿@model DrDone.ViewModels.Signup
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-8 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                @Html.LabelFor(f => f.Username)
+                                @Html.TextBoxFor(f => f.Username, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(f => f.Email)
+                                @Html.TextBoxFor(f => f.Email, new { @class = "form-control", @type="email" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(f => f.Password)
+                                @Html.PasswordFor(f => f.Password, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-6">
+                                        @Html.LabelFor(f => f.Name)
+                                        @Html.TextBoxFor(f => f.Name, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-6">
+                                        @Html.LabelFor(f => f.Surname)
+                                        @Html.TextBoxFor(f => f.Surname, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                                @Html.LabelFor(f => f.Phone)
+                                @Html.TextBoxFor(f => f.Phone, new { @class = "form-control" })
+                            <div class="form-group">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" value="Kaydol" class="btn btn-primary" />
+                    <a href="@Url.Action("index")">Iptal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

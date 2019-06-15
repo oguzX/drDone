@@ -1,0 +1,42 @@
+﻿@model IList<DrDone.Areas.Admin.ViewModels.CategoryCheckBox>
+<div class="card">
+    <div class="card-header">Kategoriler @if (User.IsInRole("admin"))
+    {
+    <div class="float-right pt-1 text-dark pr-3 pl-3" style="cursor:pointer" id="open-addCatModal"><i class="fas fa-ellipsis-v"></i></div>
+    }</div>
+    <ul class="list-group" id="allCategories">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <li class="list-group-item">
+                @Html.Hidden("Categories[" + i + "].Id", Model[i].Id)
+                <label for="Roles_@(i)__IsChecked">
+                    @Html.CheckBox("Categories[" + i + "].IsChecked", Model[i].IsChecked)
+                    @Model[i].Name
+                </label>
+            </li>
+        }
+    </ul>
+</div>
+<div class="modal fade" id="modal_category_add" tabindex="-1" role="dialog" aria-labelledby="modal_category_add" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_category_add">Kategori Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="Price">Kategori adı</label>
+                    <input class="form-control" placeholder="Kategori Adı" id="CategoryName" name="CategoryName" type="text">
+                </div>
+            </div>
+            <div id="result"></div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal">İptal</a>
+                <button type="button" id="addButton" class="btn btn-sm btn-primary">Kategoriyi Ekle</button>
+            </div>
+        </div>
+    </div>
+</div>

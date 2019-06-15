@@ -9,7 +9,7 @@ namespace DrDone.Models
 {
     public class Role
     {
-        public virtual int id { get; set; }
+        public virtual int Id { get; set; }
         public virtual String Name{ get; set; }
     }
     public class RoleMap: ClassMapping<Role>
@@ -17,7 +17,7 @@ namespace DrDone.Models
         public RoleMap()
         {
             Table("roles");
-            Id(i => i.id, x => x.Generator(Generators.Identity));
+            Id(i => i.Id, x => x.Generator(Generators.Identity));
             Property(x => x.Name, x => x.NotNullable(true));
         }
     }

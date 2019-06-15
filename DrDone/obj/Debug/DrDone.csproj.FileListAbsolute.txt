@@ -68,7 +68,6 @@ C:\Users\zug\source\repos\DrDone\DrDone\bin\System.Web.WebPages.Deployment.xml
 C:\Users\zug\source\repos\DrDone\DrDone\bin\System.Web.WebPages.Razor.xml
 C:\Users\zug\source\repos\DrDone\DrDone\bin\Newtonsoft.Json.xml
 C:\Users\zug\source\repos\DrDone\DrDone\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\zug\source\repos\DrDone\DrDone\obj\Debug\DrDone.csprojAssemblyReference.cache
 C:\Users\zug\source\repos\DrDone\DrDone\obj\Debug\DrDone.csproj.CoreCompileInputs.cache
 C:\Users\zug\source\repos\DrDone\DrDone\obj\Debug\DrDone.csproj.CopyComplete
 C:\Users\zug\source\repos\DrDone\DrDone\obj\Debug\DrDone.dll
@@ -121,3 +120,5 @@ C:\Users\zug\source\repos\drDone\DrDone\bin\Remotion.Linq.xml
 C:\Users\zug\source\repos\drDone\DrDone\bin\Remotion.Linq.EagerFetching.xml
 C:\Users\zug\source\repos\drDone\DrDone\bin\BCrypt.Net.dll
 C:\Users\zug\source\repos\drDone\DrDone\bin\BCrypt.Net.xml
+C:\Users\zug\source\repos\drDone\DrDone\bin\NHibernate.dll
+C:\Users\zug\source\repos\drDone\DrDone\obj\Debug\DrDone.csprojAssemblyReference.cache

@@ -1,0 +1,124 @@
+﻿@model DrDone.Areas.Admin.ViewModels.ProductIndex
+
+@{
+    ViewBag.Title = Model.IsCheck ? "Ürün Kontrol" : "Ürünlerim";
+}
+
+    <div class="col-10 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h1>@(Model.IsCheck ? "Ürün Kontrol" : "Ürünlerim")</h1>
+                <div class="btn-toolbar">
+                    <div class="col-8">
+                        <a href="@Url.Action("add")" class="btn btn-primary btn-sm ml-2 mr-2"><i class="fas fa-plus"></i> Ürün oluştur</a>
+                    </div>
+                    <div class="btn-group col-4">
+                        @if (Model.Product.HasPreviousPage)
+                        {
+                            <a href="@Url.Action("index",new { Page=Model.Product.PreviousPage })" class="btn btn-primary btn-sm">
+                                <i class="fas fa-chevron-left"></i> Önceki Sayfa
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="#" class="btn btn-secondary btn-disabled btn-sm">
+                                <i class="fas fa-chevron-left"></i> Önceki Sayfa
+                            </a>
+                        }
+
+                        @if (Model.Product.HasNextPage)
+                        {
+                            <a href="@Url.Action("index",new { Page = Model.Product.NextPage})" class="btn btn-primary btn-sm">
+                                <i class="fas fa-chevron-right"></i> Sonraki Sayfa
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="#" class="btn btn-secondary btn-disabled btn-sm">
+                                <i class="fas fa-chevron-right"></i> Sonraki Sayfa
+                            </a>
+                        }
+
+                    </div>
+                </div>
+                @if (!Model.Product.Any())
+                {
+                    <div class="mt-5 mx-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>@(Model.IsCheck ? "Kontrol edilecek ürün bulunmuyor":"Ürünün Bulunmuyor")</h4> 
+                            </div>
+                        </div>
+                    </div>
+                }
+                                            else
+                                            {
+                    <table class="table table-striped mt-2">
+                        <thead>
+                        <tr>
+                        <th></th>
+                        <th style="width:13%"></th>
+                        <th style="width:15%">Başlık</th>
+                        <th style="width:20%">Açıklama</th>
+                        <th style="width:15%">Kategori</th>
+                        <th style="width:10%">Tarih</th>
+                        <th class="text-center"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model.Product)
+                                        {
+                                            var cls = "";
+                                            if (product.Status == 0)
+                                            {
+                                                cls = "bg-warning";
+                                            }
+                            <tr class="@cls" @if (cls != "") { @: data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ürün Henüz Onaylanmadı"
+                                }>
+                                @if (User.IsInRole("admin"))
+                                {
+                                <td>
+                                    <a href="@Url.Action("Star", new { product.Id })" class="text-warning">
+                                        @if (product.Status == 2)
+                                        {<i class="fas fa-star"></i>}
+                                        else
+                                        {<i class="far fa-star"></i>}
+                                    </a>
+                                </td>
+                                }
+                                <td><img src="@Url.Content(product.Image)" data-toggle="popover" data-trigger="hover" data-placement="right" data-img="@Url.Content(product.Image)" class="img-thumbnail" /></td>
+                                <td>@product.Title</td>
+                                <td>@product.DescriptionShort</td>
+                                <td>@string.Join(",", product.Category.Select(t => t.Name))</td>
+                                <td>@product.CreatedAt</td>
+                                <td class="text-center">
+                                    @if (!product.IsDeleted)
+                                    {
+                                        <div class="btn btn-group btn-group-sm">
+                                            @if (product.Status == 0 && (User.IsInRole("moderator") || User.IsInRole("admin")))
+                                            {
+                                                <a href="@Url.Action("Publish", new { product.Id })" class="btn btn-success"><i class="fas fa-edit"></i> Yayınla</a>
+                                            }
+                                            <a href="@Url.Action("Edit", new { product.Id })" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                                            <a href="@Url.Action("trash", new { product.Id })" data-post="Çöp kutusuna taşınsın mı" class="btn btn-danger"><i class="fas fa-trash"></i> Çöp</a>
+                                            <a href="#" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"></a>
+                                            <div class="dropdown-menu">
+                                                <a href="@Url.Action("delete", new { product.Id })" class="dropdown-item btn btn-danger" data-post="Tamamen kaldırmak istediğinize emin misiniz?"><i class="fas fa-trash"></i> sil</a>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("restore", new { product.Id })" class="btn btn-sm btn-success">
+                                            <i class="fas fa-undo"></i> Geri Dön
+                                        </a>
+                                    }
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                </div>
+        </div>
+    </div>

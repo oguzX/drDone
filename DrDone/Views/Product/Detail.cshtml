@@ -1,0 +1,70 @@
+﻿@model DrDone.ViewModels.DetailModel
+@{
+    ViewBag.Title = "Detail";
+}
+
+@section AddToHead{
+    <link href="@Url.Content("~/assets/styles/product_styles.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/styles/product_responsive.css")" rel="stylesheet" type="text/css" />
+}
+@Html.Partial("_Menu", Model.Categories)
+<div class="single_product">
+    <div class="container">
+        <div class="row">
+
+            <!-- Images -->
+            <div class="col-lg-2 order-lg-1 order-2">
+                <ul class="image_list">
+                    <li data-image="@Url.Content(Model.Product.Image)"><img src="@Url.Content(Model.Product.Image)" alt=""></li>
+                </ul>
+            </div>
+
+            <!-- Selected Image -->
+            <div class="col-lg-5 order-lg-2 order-1">
+                <div class="image_selected"><img src="@Url.Content(Model.Product.Image)" alt=""></div>
+            </div>
+
+            <!-- Description -->
+            <div class="col-lg-5 order-3">
+                <div class="product_description">
+                    <div class="product_category">
+                        @foreach (var cat in Model.Product.Category)
+                        {
+                            <a href="@Url.Action("category","home", new { cat.Id})" class="border-right pr-2">@cat.Name</a> 
+                        }
+                    </div>
+                    <div class="product_name text-capitalize">@Model.Product.Title</div>
+                    <div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    <div class="product_text"><p>@Model.Product.Description</p></div>
+                    <div class="order_info d-flex flex-row">
+                        <form action="#">
+                            <div class="clearfix" style="z-index: 1000;">
+                                <div class="product_price">@Model.Product.Price ₺</div>
+                                <div class="button_container">
+                                    <button onclick="window.location.href='mailto:@Model.Product.User.Email'" type="button" class="button cart_button">İletişime Geç</button>
+                                </div>
+                                <div class="card mt-4">
+                                    <div class="card-body">
+                                        <div class="row border-bottom">
+                                            <div class="col-2">
+                                                <h3 class="text-dark"><i class="fas fa-user-tie"></i></h3>
+                                            </div>
+                                            <div class="col">Satıcı Bilgileri</div>
+                                        </div>
+                                        <div class="row pt-4">
+                                            <p class="col-12">@Model.Product.User.Name @Model.Product.User.Surname</p>
+                                            <p class="col-12"><i class="fas fa-envelope"></i> <a class=" pl-2 pr-2" href="mailto:@Model.Product.User.Email">@Model.Product.User.Email</a></p>
+                                            <p class="col-12"><i class="fas fa-phone"></i> @Model.Product.User.Phone  </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

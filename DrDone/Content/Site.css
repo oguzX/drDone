@@ -17,7 +17,16 @@
     font-size: 100px
 }
 
+/*
+    IMG
+*/
+.img-5{
+    width:50%
+}
 
+.card {
+    margin-bottom: 20px
+}
 /*
     Form 
 */

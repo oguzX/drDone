@@ -12,7 +12,16 @@ namespace DrDone.Models
         public virtual int Id { get; set; }
         public virtual string Username { get; set; }
         public virtual string Email { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Surname { get; set; }
+        public virtual string Phone { get; set; }
         public virtual string PasswordHash { get; set; }
+        public virtual IList<Role> Roles { get; set; }
+
+        public User()
+        {
+            Roles = new List<Role>();
+        }
 
         public virtual void SetPassword(string password)
         {
@@ -28,6 +37,7 @@ namespace DrDone.Models
             BCrypt.Net.BCrypt.HashPassword("",13);
         }
     }
+
     public class UserMap : ClassMapping<User>
     {
         public UserMap()
@@ -37,10 +47,20 @@ namespace DrDone.Models
             Id(x => x.Id, x => x.Generator(Generators.Identity));
             Property(x => x.Username, x => x.NotNullable(true));
             Property(x => x.Email, x => x.NotNullable(true));
+            Property(x => x.Name, x => x.NotNullable(true));
+            Property(x => x.Surname, x => x.NotNullable(true));
+            Property(x => x.Phone, x => x.NotNullable(true));
             Property(x => x.PasswordHash, x => {
                 x.NotNullable(true);
                 x.Column("password_hash");
             });
+
+            Bag(x => x.Roles, x =>
+              {
+                  x.Table("role_users");
+                  x.Key(k => k.Column("user_id"));
+              }, x=>x.ManyToMany(k=>k.Column("role_id")));
+
         }
     }
 }

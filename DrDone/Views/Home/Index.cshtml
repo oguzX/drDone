@@ -1,31 +1,67 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model DrDone.ViewModels.IndexModel
+
+@Html.Partial("_Menu", Model.Categories)
+
+@{
+    ViewBag.Title = "Ana Sayfa";
+    var firstStarred = Model.StaredProduct.FirstOrDefault();
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+@section AddToHead{
+    <link href="@Url.Content("~/assets/styles/responsive.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/assets/styles/main_styles.css")" rel="stylesheet" type="text/css" />
+}
+<div class="banner">
+    <div class="banner_background" style="background-image:url('@Url.Content("~/assets/images/banner_background.jpg")')"></div>
+    <div class="container fill_height">
+        <div class="row fill_height">
+            <div class="banner_product_image"><img src="@Url.Content(firstStarred.Image)" alt=""></div>
+            <div class="col-lg-5 offset-lg-4 fill_height">
+                <div class="banner_content">
+                    <h1 class="banner_text">@firstStarred.Title</h1>
+                    <div class="banner_price"><span>@(firstStarred.Price + 100)</span>@firstStarred.Price</div>
+                    <div class="banner_product_name">@firstStarred.DescriptionShort</div>
+                    <div class="button banner_button"><a href="@Url.Action("detail","product",new { firstStarred.Id })">Ürünü incele</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+<div class="viewed">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="viewed_title_container">
+                    <h3 class="viewed_title">Yıldızlı Ürünler</h3>
+                    <div class="viewed_nav_container">
+                        <div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                        <div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="viewed_slider_container">
+
+                    <!-- Recently Viewed Slider -->
+                    <div class="owl-carousel owl-theme viewed_slider">
+                        @foreach (var product in Model.StaredProduct)
+                        {
+                            <div class="owl-item">
+                                <div class="viewed_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                    <div class="viewed_image"><img src="@Url.Content(product.Image)" alt=""></div>
+                                    <div class="viewed_content text-center">
+                                        <div class="viewed_price">@product.Price</div>
+                                        <div class="viewed_name"><a href="@Url.Action("detail","product",new { product.Id })">@product.Title</a></div>
+                                    </div>
+                                    <ul class="item_marks">
+                                        <li class="item_mark item_new"><h3><i class="fas fa-star text-warning"></i></h3></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
